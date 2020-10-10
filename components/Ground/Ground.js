@@ -1,44 +1,64 @@
-import React from 'react';
+import React, { useState } from "react"
 import { StatusBar } from "expo-status-bar"
-import { StyleSheet, Text, View, SafeAreaView, Button} from "react-native"
+import { StyleSheet, Text, View, SafeAreaView, Button } from "react-native"
 
-const Ground = ({route, navigation}) => {
+const Ground = ({ route }) => {
+  const { g } = route.params
 
-  const { g } = route.params;
+  const [favori, setFavori] = useState(g.favori)
 
-  console.log(g);
-  
+  const renderFavButton = () => {
+    if (!favori) {
+      return (
+        <Button
+          title="AJOUTER AUX FAVORIS"
+          onPress={() => favAdded()}
+          style={styles.favButton}
+        />
+      )
+    }
+    return <Text>⭐ Ce terrain a été ajouté à mes favoris ⭐</Text>
+  }
+
+  const favAdded = () => {
+    setFavori(!favori)
+    g.favori = !g.favori
+  }
+
   return (
-
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>{g.groundName}</Text>
-      <Button
-        title="AJOUTER AUX FAVORIS"
-        onPress={() => alert('Terrain ajouté')}
-        style={styles.favButton}
-      />
-      <Text>Localisation</Text>
-      <Text> {g.address} </Text>
-      <Text>Détails du terrain</Text>
-  <Text>Accessibilité: Terrain {g.limit}</Text>
-  <Text>Nombre de paniers (demi-terrains) : {g.basketNumber}</Text>
-  <Text>Accès en transports: {g.transport}</Text>
-  <Text></Text>
+      {renderFavButton()}
+      <View style={{ flex: 1, flexDirection: "column" }}>
+        <Text style={styles.subtitle}>Localisation:</Text>
+        <Text> {g.address} </Text>
+        <Text style={styles.subtitle}>Détails du terrain:</Text>
+        <Text>Accessibilité: Terrain {g.limit}</Text>
+        <Text>Nombre de paniers (demi-terrains) : {g.basketNumber}</Text>
+        <Text>Accès en transports: {g.transport}</Text>
+      </View>
       <StatusBar style="auto" />
     </SafeAreaView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      alignItems: "center",
-    },
-    title: {
-      fontWeight: "bold",
-      fontSize: 35,
-    },
-  })
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 35,
+    padding: 10,
+  },
+  subtitle: {
+    fontWeight: "bold",
+    fontSize: 20,
+    marginTop: 20,
+    marginBottom: 5,
+  },
+})
 
-export default Ground;
+export default Ground

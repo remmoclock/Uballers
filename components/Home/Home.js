@@ -22,7 +22,7 @@ const Home = ({navigation}) => {
           basketNumber: "2",
           limit: "public",
           transport:
-            "RER C, station Champ de Mars - Tour Eiffel ; métro ligne 6, station Bir-Hakeim",
+            "Métro ligne 1, station Bir-Hakeim",
             favori: false
         },
         {
@@ -32,7 +32,7 @@ const Home = ({navigation}) => {
           basketNumber: "6",
           limit: "privé",
           transport:
-            "RER C, station Champ de Mars - Tour Eiffel ; métro ligne 6, station Bir-Hakeim",
+            "RER C, Issy val de seine - Tour Eiffel ; métro ligne 12, mairie d'Issy",
             favori: false
         },
       ]
