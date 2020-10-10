@@ -1,73 +1,21 @@
-import { StatusBar } from "expo-status-bar"
-import React from "react"
-import { StyleSheet, Text, View, SafeAreaView, FlatList } from "react-native"
+import * as React from 'react';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './components/Home/Home';
+import Ground from './components/Ground/Ground';
 
 export default function App() {
-  const GroundsData = [
-    {
-      groundId: "2",
-      address: "77-101 Quai Branly, Paris, France",
-      groundName: "Bir-Hakeim",
-      basketNumber: "4",
-      transport:
-        "RER C, station Champ de Mars - Tour Eiffel ; métro ligne 6, station Bir-Hakeim",
-    },
-    {
-      groundId: "26585",
-      address: "1 Rue du Petit Cardinal, Bordeaux, France",
-      groundName: "1 Rue du Petit Cardinal",
-      basketNumber: "2",
-      transport:
-        "RER C, station Champ de Mars - Tour Eiffel ; métro ligne 6, station Bir-Hakeim",
-    },
-    {
-      groundId: "43555",
-      address: "16 avenue jean bouin, Issy, France",
-      groundName: "Issy",
-      basketNumber: "6",
-      transport:
-        "RER C, station Champ de Mars - Tour Eiffel ; métro ligne 6, station Bir-Hakeim",
-    },
-  ]
 
-  const Item = ({ item }) => (
-    <View style={styles.item}>
-      <Text style={styles.list}>{item.groundName}</Text>
-    </View>
-  )
+  const Stack = createStackNavigator();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Liste des terrains</Text>
-      <StatusBar style="auto" />
-      <FlatList
-        data={GroundsData}
-        renderItem={Item}
-        keyExtractor={(item) => item.groundId}
-      />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+      <Stack.Screen name="Accueil" component={Home} />
+      <Stack.Screen name="Terrain" component={Ground} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 35,
-  },
-  list: {
-    fontSize: 20,
-    color: "white",
-  },
-  item: {
-    backgroundColor: "red",
-    padding: 20,
-    marginVertical: 10,
-    marginHorizontal: 15,
-    alignItems: "center",
-  },
-})
