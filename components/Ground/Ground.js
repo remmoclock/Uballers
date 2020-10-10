@@ -1,52 +1,30 @@
 import React from 'react';
 import { StatusBar } from "expo-status-bar"
-import { StyleSheet, Text, View, SafeAreaView, FlatList } from "react-native"
+import { StyleSheet, Text, View, SafeAreaView, Button} from "react-native"
 
-const Ground = () => {
+const Ground = ({route, navigation}) => {
 
-    const GroundsData = [
-        {
-          groundId: "2",
-          address: "77-101 Quai Branly, Paris, France",
-          groundName: "Bir-Hakeim",
-          basketNumber: "4",
-          transport:
-            "RER C, station Champ de Mars - Tour Eiffel ; métro ligne 6, station Bir-Hakeim",
-        },
-        {
-          groundId: "26585",
-          address: "1 Rue du Petit Cardinal, Bordeaux, France",
-          groundName: "1 Rue du Petit Cardinal",
-          basketNumber: "2",
-          transport:
-            "RER C, station Champ de Mars - Tour Eiffel ; métro ligne 6, station Bir-Hakeim",
-        },
-        {
-          groundId: "43555",
-          address: "16 avenue jean bouin, Issy, France",
-          groundName: "Issy",
-          basketNumber: "6",
-          transport:
-            "RER C, station Champ de Mars - Tour Eiffel ; métro ligne 6, station Bir-Hakeim",
-        },
-      ]
+  const { g } = route.params;
 
-
-    const Item = ({ item }) => (
-        <View style={styles.item}>
-          <Text style={styles.list}>{item.groundName}</Text>
-        </View>
-      )
-    
+  console.log(g);
+  
   return (
+
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Liste des terrains</Text>
+      <Text style={styles.title}>{g.groundName}</Text>
+      <Button
+        title="AJOUTER AUX FAVORIS"
+        onPress={() => alert('Terrain ajouté')}
+        style={styles.favButton}
+      />
+      <Text>Localisation</Text>
+      <Text> {g.address} </Text>
+      <Text>Détails du terrain</Text>
+  <Text>Accessibilité: Terrain {g.limit}</Text>
+  <Text>Nombre de paniers (demi-terrains) : {g.basketNumber}</Text>
+  <Text>Accès en transports: {g.transport}</Text>
+  <Text></Text>
       <StatusBar style="auto" />
-      <FlatList
-        data={GroundsData}
-        renderItem={Item}
-        keyExtractor={(item) => item.groundId}
-        />
     </SafeAreaView>
   );
 }
@@ -60,17 +38,6 @@ const styles = StyleSheet.create({
     title: {
       fontWeight: "bold",
       fontSize: 35,
-    },
-    list: {
-      fontSize: 20,
-      color: "white",
-    },
-    item: {
-      backgroundColor: "red",
-      padding: 20,
-      marginVertical: 10,
-      marginHorizontal: 15,
-      alignItems: "center",
     },
   })
 
